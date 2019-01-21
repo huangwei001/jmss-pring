@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="common.xml"></import>
+
+    <!--配置消息监听器-->
+    <bean id="messageListener" class="com.test.jms.consumer.ConsumerListener"></bean>
+
+    <!--配置消息监听容器-->
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="targetTopic"></property>
+        <property name="messageListener" ref="messageListener"></property>
+    </bean>
+
+</beans>
